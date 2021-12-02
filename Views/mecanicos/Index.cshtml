@@ -1,0 +1,75 @@
+﻿@model IEnumerable<pruebaTecnica.Models.Mecanico>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class = "container">
+    @if (TempData["mensaje"] != null)
+    {
+        <div class = "alert-warning alert-dismissible fade show" role = "alert">
+            @TempData["mensaje"]
+            <button type = "button" class = "close" data-dismiss = "alert" aria-label = "Close">
+                <span aria-hidden = "true">&times;</span>
+            </button>
+        </div>
+    }
+    <div class = "row">
+        <div class = "col-sm-6">
+            <h3>Lista de clientes</h3>
+        </div>
+         <div class = "col-sm-6">
+           <a class = "btn btn-success d-bloc" asp-action = "Create" asp-controller = "mecanicos">agregar mecanico</a>
+        </div>
+    </div>
+
+    <div class = "row">
+        @if (Model.Count()>0)
+        {
+            <table class = "table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.Id)</td>
+                        <td>@Html.DisplayNameFor(m => m.primerNombre)</td>
+                        <td>@Html.DisplayNameFor(m => m.segundoNombre)</td>
+                        <td>@Html.DisplayNameFor(m => m.primerApellido)</td>
+                        <td>@Html.DisplayNameFor(m => m.segundoApellido)</td>
+                        <td>@Html.DisplayNameFor(m => m.tipoDocumento)</td>
+                        <td>@Html.DisplayNameFor(m => m.numeroDocumento)</td>
+                        <td>@Html.DisplayNameFor(m => m.celular)</td>
+                        <td>@Html.DisplayNameFor(m => m.direccion)</td>
+                        <td>@Html.DisplayNameFor(m => m.correoElectronico)</td>
+                        <td>@Html.DisplayNameFor(m => m.estado)</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var i in Model)
+                    {
+                        <tr>
+                        <td>@i.Id</td>
+                        <td>@i.primerNombre</td>
+                        <td>@i.segundoNombre</td>
+                        <td>@i.primerApellido</td>
+                        <td>@i.segundoApellido</td>
+                        <td>@i.tipoDocumento</td>
+                        <td>@i.numeroDocumento</td>
+                        <td>@i.celular</td>
+                        <td>@i.direccion</td>
+                        <td>@i.correoElectronico</td>
+                        <td>@i.estado</td>
+                        <td>
+                            <a asp-controller = "mecanicos" asp-action = "Edit" asp-route-id = "@i.Id" class = "btn btn-warning">Editar</a>
+                            <a asp-controller = "mecanicos" asp-action = "Delete" asp-route-id = "@i.Id" class = "btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+           <div> No existen registros</div>
+        }
+    </div>
+</>
